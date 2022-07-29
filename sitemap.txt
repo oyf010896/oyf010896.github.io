@@ -1,3 +1,11 @@
-http://example.com/2022/07/29/CDH6/
+http://example.com/2022/07/29/sqlserver/
+http://example.com/2022/07/29/redis/
 http://example.com/2022/07/29/%E6%A6%95%E5%AE%9D/
+http://example.com/2022/07/29/nginx/
+http://example.com/2022/07/29/mysqlnginx/
+http://example.com/2022/07/29/graylog/
+http://example.com/2022/07/29/fastdfs/
+http://example.com/2022/07/29/ELKF/
+http://example.com/2022/07/29/zabbix/
+http://example.com/2022/07/29/CDH6/
 http://example.com/
