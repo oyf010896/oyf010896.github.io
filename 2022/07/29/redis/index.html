@@ -1,2 +1,219 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>帆大腿的博客</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="帆大腿的博客" type="application/atom+xml">
-</head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>centos7 下安装redis4.0集群 | 帆大腿的博客</title><meta name="keywords" content="做饭，打游戏，玩技术"><meta name="author" content="帆大腿"><meta name="copyright" content="帆大腿"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="centos7 下安装redis4.0集群1、环境· CentOS版本：CentOS 7 · 三台主机(IP)：192.168.1.2、192.168.1.3、192.168.1.4 · Redis版本：4.0.8 2、注意事项 2.1、安裝 GCC 编译工具 不然会有编译不过的问题 1yum install -y gcc g++ gcc-c++ make   2.2、升级所有的包，防止出现版本过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7 下安装redis4.0集群">
+<meta property="og:url" content="http://example.com/2022/07/29/redis/index.html">
+<meta property="og:site_name" content="帆大腿的博客">
+<meta property="og:description" content="centos7 下安装redis4.0集群1、环境· CentOS版本：CentOS 7 · 三台主机(IP)：192.168.1.2、192.168.1.3、192.168.1.4 · Redis版本：4.0.8 2、注意事项 2.1、安裝 GCC 编译工具 不然会有编译不过的问题 1yum install -y gcc g++ gcc-c++ make   2.2、升级所有的包，防止出现版本过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-07-29T03:13:29.000Z">
+<meta property="article:modified_time" content="2022-07-29T04:10:34.901Z">
+<meta property="article:author" content="帆大腿">
+<meta property="article:tag" content="做饭，打游戏，玩技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/07/29/redis/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'centos7 下安装redis4.0集群',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-29 12:10:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="帆大腿的博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">帆大腿的博客</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">centos7 下安装redis4.0集群</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-29T04:10:34.901Z" title="更新于 2022-07-29 12:10:34">2022-07-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="centos7 下安装redis4.0集群"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="centos7-下安装redis4-0集群"><a href="#centos7-下安装redis4-0集群" class="headerlink" title="centos7 下安装redis4.0集群"></a>centos7 下安装redis4.0集群</h1><h5 id="1、环境"><a href="#1、环境" class="headerlink" title="1、环境"></a>1、环境</h5><p>· CentOS版本：CentOS 7</p>
+<p>· 三台主机(IP)：192.168.1.2、192.168.1.3、192.168.1.4</p>
+<p>· Redis版本：4.0.8</p>
+<h5 id="2、注意事项"><a href="#2、注意事项" class="headerlink" title="2、注意事项"></a>2、注意事项</h5><p> 2.1、安裝 GCC 编译工具 不然会有编译不过的问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc g++ gcc-c++ make</span><br></pre></td></tr></table></figure>
+
+<p> 2.2、升级所有的包，防止出现版本过久不兼容问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y update</span><br></pre></td></tr></table></figure>
+
+<h2 id="集群搭建"><a href="#集群搭建" class="headerlink" title="集群搭建"></a>集群搭建</h2><h3 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h3><h5 id="下载，解压，编译安装"><a href="#下载，解压，编译安装" class="headerlink" title="下载，解压，编译安装"></a>下载，解压，编译安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /opt</span><br><span class="line">wget http://download.redis.io/releases/redis-*.*.*.tar.gz</span><br><span class="line">ar xzf redis-*.*.*.tar.gz</span><br><span class="line">cd redis-*.*.*.</span><br><span class="line">make</span><br><span class="line">如果因为上次编译失败，有残留的文件</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make distclean</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h5><p>1.首先在 第一台机器上 &#x2F;opt&#x2F;redis- <em>.</em>.*.目录下创建 redis-cluster 目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/redis-*/redis-cluster</span><br></pre></td></tr></table></figure>
+
+<p>2.在 redis-cluster 目录下，创建名为7000、7001、7002的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/redis-*/redis-cluster\</span><br><span class="line">mkdir 7000 7001 7002</span><br></pre></td></tr></table></figure>
+
+<p>3.分别修改这三个配置文件，把如下redis.conf 配置内容粘贴进去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vi 7000/redis.conf</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vi 7001/redis.conf</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vi 7002/redis.conf</span></span><br><span class="line">redis.conf 配置</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">端口7000,7001,7002</span></span><br><span class="line">port 7000</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">默认ip为127.0.0.1，需要改为其他节点机器可访问的ip，否则创建集群时无法访问对应的端口，无法创建集群</span></span><br><span class="line">bind 本机IP</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">redis后台运行</span></span><br><span class="line">daemonize yes </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">pidfile文件对应7000，7001，7002</span></span><br><span class="line">pidfile /var/run/redis_7000.pid</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">开启集群，把注释<span class="comment">#去掉</span></span></span><br><span class="line">cluster-enabled yes</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">集群的配置，配置文件首次启动自动生成 7000，7001，7002</span>     </span><br><span class="line">cluster-config-file nodes_7000.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">请求超时，默认15秒，可自行设置</span></span><br><span class="line">luster-node-timeout 10100</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">aof日志开启，有需要就开启，它会每次写操作都记录一条日志</span></span><br><span class="line">appendonly yes</span><br></pre></td></tr></table></figure>
+
+<p>接着在另外两台机器上(10.91.250.147，10.91.250.148)重复以上三步，只是把目录改为7003、7004、7005、7006、7007、7008对应的配置文件也按照这个规则修改即可</p>
+<h3 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h3><p>#第一台机器上执行 3个节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="keyword">for</span>((i=0;i&lt;=2;i++)); <span class="keyword">do</span> /opt/redis-*/src/redis-server /opt/redis-*/redis-cluster/700<span class="variable">$i</span>/redis.conf; <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
+
+<p>#第二台机器上执行 3个节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="keyword">for</span>((i=3;i&lt;=5;i++)); <span class="keyword">do</span> /opt/redis*/src/redis-server /opt/redis-*/redis-cluster/700<span class="variable">$i</span>/redis.conf; <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
+
+<p>#第三台机器上执行 3个节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="keyword">for</span>((i=6;i&lt;=8;i++)); <span class="keyword">do</span> /opt/redi*/src/redis-server /opt/redis-*/redis-cluster/700<span class="variable">$i</span>/redis.conf; <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="检查服务"><a href="#检查服务" class="headerlink" title="检查服务"></a>检查服务</h3><p>检查各 Redis 各个节点启动情况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis           //redis是否启动成功</span><br><span class="line">netstat -tnlp | grep redis    //监听redis端口</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Ruby"><a href="#安装Ruby" class="headerlink" title="安装Ruby"></a>安装Ruby</h3><p>redis-trib.rb 这个工具构建redis集群的时候，redis requires Ruby version &gt;&#x3D; 2.2.2</p>
+<p>(无外网的话要进行ruby的下载解压进行cp)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget http://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.5.tar.gz</span><br><span class="line">tar zxvf  ruby-2.3.5.tar.gz</span><br><span class="line">cd ruby-2.3.5</span><br><span class="line">./configure  --prefix=/opt/ruby</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">ln -s /opt/ruby/bin/ruby /usr/bin/ruby</span><br><span class="line">ln -s /opt/ruby/bin/gem /usr/bin/gem</span><br><span class="line">ruby -v　</span><br></pre></td></tr></table></figure>
+
+<h5 id="安装rubygem-redis依赖"><a href="#安装rubygem-redis依赖" class="headerlink" title="安装rubygem redis依赖"></a>安装rubygem redis依赖</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://rubygems.org/downloads/redis-3.3.0.gem</span><br><span class="line">gem install -l redis-3.3.0.gem</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h3><p>注意：在任意一台上运行，不要在每台机器上都运行，一台就够了，</p>
+<p>Redis 官方提供了 redis-trib.rb 这个工具，就在解压目录的 src 目录中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> /redis/redis-*/src/redis-trib.rb create --replicas 1 IP</span><br><span class="line">1:7000 IP1:7001 IP1:7002 IP2:7003 IP2:7004 IP2:7005 IP3:7006 IP3:7007 IP3:7008</span><br></pre></td></tr></table></figure>
+
+<p>出现以下内容</p>
+<p>[root@localhost redis-cluster]# &#x2F;opt&#x2F;redis&#x2F;redis-*&#x2F;src&#x2F;redis-trib.rb create –replicas 1 IP<br>1:7000 IP1:7001 IP1:7002 IP2:7003 IP2:7004 IP2:7005 IP3:7006 IP3:7007 IP3:7008</p>
+<p>&gt;&gt;&gt; Creating cluster</p>
+<p>&gt;&gt;&gt; Performing hash slots allocation on 9 nodes…</p>
+<p>Using 4 masters:10.91.250.146:700010.91.250.147:700310.91.250.148:700610.91.250.146:7001</p>
+<p>Adding replica 10.91.250.147:7004 to 10.91.250.146:7000</p>
+<p>Adding replica 10.91.250.148:7007 to 10.91.250.147:7003</p>
+<p>Adding replica 10.91.250.146:7002 to 10.91.250.148:7006</p>
+<p>Adding replica 10.91.250.147:7005 to 10.91.250.146:7001</p>
+<p>Adding replica 10.91.250.148:7008 to 10.91.250.146:7000M: 7c622ac191edd40dd61d9b79b27f6f69d02a5bbf 10.91.250.146:7000  slots:0-4095 (4096 slots) masterM: 44c81c15b01d992cb9ede4ad35477ec853d70723 10.91.250.146:7001  slots:12288-16383 (4096 slots) masterS: 38f03c27af39723e1828eb62d1775c4b6e2c3638 10.91.250.146:7002</p>
+<p>  replicates f1abb62a8c9b448ea14db421bdfe3f1d8075189cM: 987965baf505a9aa43e50e46c76189c51a8f17ec 10.91.250.147:7003  slots:4096-8191 (4096 slots) masterS: 6555292fed9c5d52fcf5b983c441aff6f96923d5 10.91.250.147:7004</p>
+<p>  replicates 7c622ac191edd40dd61d9b79b27f6f69d02a5bbfS: 2b5ba254a0405d4efde4c459867b15176f79244a 10.91.250.147:7005</p>
+<p>  replicates 44c81c15b01d992cb9ede4ad35477ec853d70723M: f1abb62a8c9b448ea14db421bdfe3f1d8075189c 10.91.250.148:7006  slots:8192-12287 (4096 slots) masterS: eb4067373d36d8a8df07951f92794e67a6aac022 10.91.250.148:7007</p>
+<p>  replicates 987965baf505a9aa43e50e46c76189c51a8f17ecS: 2919e041dd3d1daf176d6800dcd262f4e727f366 10.91.250.148:7008</p>
+<p>  replicates 7c622ac191edd40dd61d9b79b27f6f69d02a5bbf</p>
+<h4 id="Can-I-set-the-above-configuration-type-‘yes’-to-accept-yes"><a href="#Can-I-set-the-above-configuration-type-‘yes’-to-accept-yes" class="headerlink" title="Can I set the above configuration? (type ‘yes’ to accept): yes"></a>Can I set the above configuration? (type ‘yes’ to accept): yes</h4><h4 id="输入yes"><a href="#输入yes" class="headerlink" title="输入yes"></a>输入yes</h4><p>看到这个就表示集群创建成功</p>
+<p>Check for open slots</p>
+<p>&gt;&gt;&gt;Check slots coverage…[OK]  All 16384  slots   covered</p>
+<h3 id="关闭集群"><a href="#关闭集群" class="headerlink" title="关闭集群"></a>关闭集群</h3><p>这样也可以，推荐</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill redis</span><br></pre></td></tr></table></figure>
+
+
+
+<p>循环节点逐个关闭</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="keyword">for</span>((i=0;i&lt;=2;i++)); <span class="keyword">do</span> /opt/redis-4.0.8/src/redis-cli -c -h 10.91.250.146 -p 700<span class="variable">$i</span> shutdown; <span class="keyword">done</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="keyword">for</span>((i=3;i&lt;=5;i++)); <span class="keyword">do</span> /opt/redis-4.0.8/src/redis-cli -c -h 10.91.250.147 -p 700<span class="variable">$i</span> shutdown; <span class="keyword">done</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="keyword">for</span>((i=6;i&lt;=8;i++)); <span class="keyword">do</span> /opt/redis-4.0.8/src/redis-cli -c -h 10.91.250.148 -p 700<span class="variable">$i</span> shutdown; <span class="keyword">done</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="集群验证"><a href="#集群验证" class="headerlink" title="集群验证"></a>集群验证</h3><h4 id="连接集群测试"><a href="#连接集群测试" class="headerlink" title="连接集群测试"></a>连接集群测试</h4><p>参数 -C 可连接到集群，因为 redis.conf 将 bind 改为了ip地址，所以 -h 参数不可以省略，-p 参数为端口号</p>
+<p>我们在10.91.250.146机器redis 7000 的节点set 一个key</p>
+<p>&#x2F;opt&#x2F;redis-4.0.8&#x2F;src&#x2F;redis-cli -h IP -c -p 7000</p>
+<p>IP:7000&gt; cluster nodes</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">帆大腿</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/07/29/redis/">http://example.com/2022/07/29/redis/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">帆大腿的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/29/nginx/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">nginx平滑升级</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/29/sqlserver/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">sqlserver命令汇总</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">帆大腿</div><div class="author-info__description">记录帆大腿的生活、工作和学习笔记</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">爱榕宝，爱技术，记录自己的生活，充实自己！！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#centos7-%E4%B8%8B%E5%AE%89%E8%A3%85redis4-0%E9%9B%86%E7%BE%A4"><span class="toc-number">1.</span> <span class="toc-text">centos7 下安装redis4.0集群</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%8E%AF%E5%A2%83"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">1、环境</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">2、注意事项</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA"><span class="toc-number">1.1.</span> <span class="toc-text">集群搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Redis"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%EF%BC%8C%E8%A7%A3%E5%8E%8B%EF%BC%8C%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.1.0.1.</span> <span class="toc-text">下载，解压，编译安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">1.1.1.0.2.</span> <span class="toc-text">创建节点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%9B%86%E7%BE%A4"><span class="toc-number">1.1.2.</span> <span class="toc-text">启动集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.1.3.</span> <span class="toc-text">检查服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Ruby"><span class="toc-number">1.1.4.</span> <span class="toc-text">安装Ruby</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85rubygem-redis%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.4.0.1.</span> <span class="toc-text">安装rubygem redis依赖</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="toc-number">1.1.5.</span> <span class="toc-text">创建集群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Can-I-set-the-above-configuration-type-%E2%80%98yes%E2%80%99-to-accept-yes"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">Can I set the above configuration? (type ‘yes’ to accept): yes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5yes"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">输入yes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E9%9B%86%E7%BE%A4"><span class="toc-number">1.1.6.</span> <span class="toc-text">关闭集群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E9%AA%8C%E8%AF%81"><span class="toc-number">1.1.7.</span> <span class="toc-text">集群验证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4%E6%B5%8B%E8%AF%95"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">连接集群测试</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/filecoin/" title="filecoin日常维护常用命令"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="filecoin日常维护常用命令"/></a><div class="content"><a class="title" href="/2022/07/29/filecoin/" title="filecoin日常维护常用命令">filecoin日常维护常用命令</a><time datetime="2022-07-29T04:27:29.000Z" title="发表于 2022-07-29 12:27:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/CDH6/" title="CDH6的部署和安装"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CDH6的部署和安装"/></a><div class="content"><a class="title" href="/2022/07/29/CDH6/" title="CDH6的部署和安装">CDH6的部署和安装</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/fastdfs/" title="fastDFS安装搭建"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="fastDFS安装搭建"/></a><div class="content"><a class="title" href="/2022/07/29/fastdfs/" title="fastDFS安装搭建">fastDFS安装搭建</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/graylog/" title="graylog的安装部署"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="graylog的安装部署"/></a><div class="content"><a class="title" href="/2022/07/29/graylog/" title="graylog的安装部署">graylog的安装部署</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/ELKF/" title="ELKF日志管理平台搭建"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ELKF日志管理平台搭建"/></a><div class="content"><a class="title" href="/2022/07/29/ELKF/" title="ELKF日志管理平台搭建">ELKF日志管理平台搭建</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 帆大腿</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

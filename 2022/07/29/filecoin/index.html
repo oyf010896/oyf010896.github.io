@@ -1,2 +1,184 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>帆大腿的博客</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="帆大腿的博客" type="application/atom+xml">
-</head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>filecoin日常维护常用命令 | 帆大腿的博客</title><meta name="keywords" content="做饭，打游戏，玩技术"><meta name="author" content="帆大腿"><meta name="copyright" content="帆大腿"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1、暂停apx任务派发 1lotus-miner worker-pause -uuid 2dcb294a-f981-450b-a3ea-0131e13f0893 --tt ap  2、放弃任务（先abort,在removed） 1lotus-miner sealing jobs |grep -w &amp;#x27;f01038389-p1-172-20-6-69&amp;#x27; | awk &amp;#x27;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filecoin日常维护常用命令">
+<meta property="og:url" content="http://example.com/2022/07/29/filecoin/index.html">
+<meta property="og:site_name" content="帆大腿的博客">
+<meta property="og:description" content="1、暂停apx任务派发 1lotus-miner worker-pause -uuid 2dcb294a-f981-450b-a3ea-0131e13f0893 --tt ap  2、放弃任务（先abort,在removed） 1lotus-miner sealing jobs |grep -w &amp;#x27;f01038389-p1-172-20-6-69&amp;#x27; | awk &amp;#x27;&amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-07-29T04:27:29.000Z">
+<meta property="article:modified_time" content="2022-07-29T06:13:34.817Z">
+<meta property="article:author" content="帆大腿">
+<meta property="article:tag" content="做饭，打游戏，玩技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/07/29/filecoin/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'filecoin日常维护常用命令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-07-29 14:13:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="帆大腿的博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">帆大腿的博客</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">filecoin日常维护常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-29T04:27:29.000Z" title="发表于 2022-07-29 12:27:29">2022-07-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-29T06:13:34.817Z" title="更新于 2022-07-29 14:13:34">2022-07-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="filecoin日常维护常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>1、暂停apx任务派发</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lotus-miner worker-pause -uuid 2dcb294a-f981-450b-a3ea-0131e13f0893 --tt ap</span><br></pre></td></tr></table></figure>
+
+<p>2、放弃任务（先abort,在removed）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lotus-miner sealing <span class="built_in">jobs</span> |grep -w <span class="string">&#x27;f01038389-p1-172-20-6-69&#x27;</span> | awk <span class="string">&#x27;&#123;print &quot;lotus-miner sealing abort &quot; $1&quot; &amp;&amp; lotus-miner sectors update-state --really-do-it &quot;$2&quot; Removed&quot; &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>3、在日志中过滤删除失败扇区并删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -80 /opt/raid0/lotusminer/logs| egrep <span class="string">&quot;(SealPreCommit2Failed|SealPreCommit1Failed|CommitFailed|CommitFinalizeFailed)&quot;</span> |awk <span class="string">&#x27;&#123;print $5&#125;&#x27;</span> | grep <span class="string">&#x27;,&#x27;</span> | egrep <span class="string">&#x27;[0-9]&#123;3,6&#125;&#x27;</span> -o |awk <span class="string">&#x27;&#123;print &quot;lotus-miner sectors update-state --really-do-it &quot; $1 &quot; Removed&quot;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>4、批量移除worker任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lotus-miner sealing workers | awk <span class="string">&#x27;/f0469055-p1-192-168-31-223/&#123;print $2&#125;&#x27;</span>| <span class="built_in">tr</span> <span class="string">&#x27;,&#x27;</span> <span class="string">&#x27; &#x27;</span> | awk <span class="string">&#x27;&#123;print &quot;lotus-miner worker-remove --uuid&quot;,$1&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>5、更改失败扇区状态为remove</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lotus-miner sectors update-state --really-do-it 85823 Removed</span><br></pre></td></tr></table></figure>
+
+<p>6、抽奖次数 isEligible true</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;isEligible.*true&#x27;</span> /opt/raid0/lotusminer/logs |grep <span class="string">&#x27;2021-08-05&#x27;</span>|<span class="built_in">wc</span> -l</span><br></pre></td></tr></table></figure>
+
+<p>7、中奖次数 isWinner true</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;&quot;isEligible&quot;: true&#x27;</span> /opt/raid0/lotusminer/logs|grep <span class="string">&#x27;&quot;isWinner&quot;: true&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>8、查看日志是否孤块</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;2021-08-12&#x27;</span> /opt/raid0/lotusminer/logs|grep <span class="string">&#x27;mined new block&#x27;</span></span><br><span class="line">看是否超时 看took时间 Winning Post用时，tooks对应值表示Winning Post完成时间，单位秒；超过25秒则有问题。</span><br></pre></td></tr></table></figure>
+
+<p>9、停止落盘任务修改落盘速率</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lotus-miner worker-pause --uuid all --tt fin</span><br><span class="line">lotus-miner update-params-fin --tickets 45 --interval 6</span><br></pre></td></tr></table></figure>
+
+<p>10、组raid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mdadm  --stop /dev/md*</span><br><span class="line">mdadm --misc --zero-superblock   /dev/nvme*n1</span><br><span class="line">组raid0</span><br><span class="line">mdadm -Cv /dev/md0 -a <span class="built_in">yes</span> -n 8  -l 0 /dev/nvme0n1   /dev/nvme1n1 /dev/nvme2n1  /dev/nvme3n1 /dev/nvme4n1 /dev/nvme5n1 /dev/nvme6n1 /dev/nvme7n1</span><br><span class="line">mdadm -Cv /dev/md0 -a <span class="built_in">yes</span> -n 4 -l 0 /dev/nvme0n1  /dev/nvme1n1  /dev/nvme2n1  /dev/nvme3n1</span><br><span class="line">mdadm -D --scan &gt;/etc/mdadm.conf</span><br><span class="line">mkfs.xfs -f /dev/md0</span><br><span class="line"><span class="built_in">ls</span> -l /dev/disk/by-uuid/|awk <span class="string">&#x27;/md0/&#123;print &quot;echo \&quot;/dev/disk/by-uuid/&quot;$9&quot; /opt/raid0 xfs defaults 0 0\&quot; &gt;&gt;/etc/fstab&quot;&#125;&#x27;</span>|bash </span><br><span class="line"><span class="built_in">mkdir</span> /opt/raid0 -p</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+
+<p>注：mdadm 命令用法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">mdadm 使用参数</span><br><span class="line">-a 检测设备名称；添加磁盘</span><br><span class="line">-n 指定设备数量</span><br><span class="line">-l 指定RAID级别</span><br><span class="line">-C 创建</span><br><span class="line">-v 显示创建过程</span><br><span class="line">-f 模拟设备损坏</span><br><span class="line">-r 移除设备</span><br><span class="line">-Q 查看摘要信息</span><br><span class="line">-D 查看详细信息</span><br><span class="line">-S 停止RAID磁盘阵列</span><br><span class="line">-x 备份盘</span><br><span class="line"></span><br><span class="line">启动raid</span><br><span class="line">[root@node1 ~]<span class="comment"># mdadm -As /dev/md0</span></span><br><span class="line">mdadm: Fail to create md0 when using /sys/module/md_mod/parameters/new_array, fallback to creation via node</span><br><span class="line">mdadm: /dev/md0 has been started with 2 drives.</span><br><span class="line"></span><br><span class="line">raid模拟故障  </span><br><span class="line">[root@node1 mnt]<span class="comment"># mdadm --manage --set-faulty /dev/md0 /dev/sdc</span></span><br><span class="line">mdadm: <span class="built_in">set</span> /dev/sdc faulty <span class="keyword">in</span> /dev/md0</span><br><span class="line"></span><br><span class="line">raid 里面移除坏掉硬盘</span><br><span class="line">[root@node1 mnt]<span class="comment"># mdadm  /dev/md0 -r /dev/sdc</span></span><br><span class="line">mdadm: hot removed /dev/sdc from /dev/md0</span><br><span class="line"></span><br><span class="line">raid 添加新的硬盘</span><br><span class="line">[root@node1 mnt]<span class="comment"># mdadm  /dev/md0 --add /dev/sdc</span></span><br><span class="line">mdadm: re-added /dev/sdc</span><br><span class="line"></span><br><span class="line">raid 添加硬盘后 查看状态</span><br><span class="line">[root@node1 mnt]<span class="comment"># mdadm -D /dev/md0</span></span><br><span class="line">/dev/md0:</span><br><span class="line">          Version : 1.2</span><br><span class="line">    Creation Time : Fri Jan 22 13:02:53 2021</span><br><span class="line">       Raid Level : raid1</span><br><span class="line">       Array Size : 9766304768 (9.10 TiB 10.00 TB)</span><br><span class="line">    Used Dev Size : 9766304768 (9.10 TiB 10.00 TB)</span><br><span class="line">     Raid Devices : 2</span><br><span class="line">    Total Devices : 2</span><br><span class="line">      Persistence : Superblock is persistent</span><br><span class="line"></span><br><span class="line">    Intent Bitmap : Internal</span><br><span class="line"></span><br><span class="line">      Update Time : Fri Jan 22 13:34:32 2021</span><br><span class="line">            State : active, degraded, recovering</span><br><span class="line">   Active Devices : 1</span><br><span class="line">  Working Devices : 2</span><br><span class="line">   Failed Devices : 0</span><br><span class="line">    Spare Devices : 1</span><br><span class="line"></span><br><span class="line">Consistency Policy : unknown</span><br><span class="line"></span><br><span class="line">   Rebuild Status : 2% complete</span><br><span class="line"></span><br><span class="line">             Name : node1:0  (<span class="built_in">local</span> to host node1)</span><br><span class="line">             UUID : e11bea7b:ecb81ce2:e7d46423:367a4f82</span><br><span class="line">           Events : 264</span><br><span class="line"></span><br><span class="line">   Number   Major   Minor   RaidDevice State</span><br><span class="line">      0       8       32        0      spare rebuilding   /dev/sdc</span><br><span class="line">      1       8      112        1      active <span class="built_in">sync</span>   /dev/sdh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止解散raid</span></span><br><span class="line">使用--stop或-S命令选项可以停止运行的阵列(注意： 停止前必须先umount)：</span><br><span class="line"></span><br><span class="line">[root@localhost eric4ever]<span class="comment"># umount /mnt/md0</span></span><br><span class="line">[root@localhost eric4ever]<span class="comment"># mdadm -S /dev/md0 (或mdadm --stop /dev/md0)</span></span><br><span class="line">mdadm: stopped /dev/md0</span><br><span class="line"></span><br><span class="line">[root@node1 ~]<span class="comment"># mdadm  --stop /dev/md0</span></span><br><span class="line">mdadm: stopped /dev/md0</span><br><span class="line"></span><br><span class="line">移除raid</span><br><span class="line">mdadm --remove /dev/md0</span><br><span class="line"></span><br><span class="line">清除raid信息</span><br><span class="line">mdadm --misc --zero-superblock /dev/sdb</span><br></pre></td></tr></table></figure>
+
+
+
+<p>11、处理remove扇区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ll /opt/raid0/workercache/unsealed/ | awk <span class="string">&#x27;&#123;print $9&#125;&#x27;</span> | awk -F<span class="string">&#x27;-&#x27;</span> <span class="string">&#x27;&#123;print $3&#125;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">cat</span> /tmp/tmp.tmp`;<span class="keyword">do</span> lotus-miner sectors status <span class="variable">$i</span>|<span class="built_in">head</span>  -n2;<span class="keyword">done</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">cat</span> /tmp/tmp.tmp `;<span class="keyword">do</span> <span class="built_in">rm</span> -rf /opt/raid0/workercache/*/*<span class="variable">$i</span>*;<span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">帆大腿</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/07/29/filecoin/">http://example.com/2022/07/29/filecoin/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">帆大腿的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/29/CDH6/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CDH6的部署和安装</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">帆大腿</div><div class="author-info__description">记录帆大腿的生活、工作和学习笔记</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">爱榕宝，爱技术，记录自己的生活，充实自己！！！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/filecoin/" title="filecoin日常维护常用命令"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="filecoin日常维护常用命令"/></a><div class="content"><a class="title" href="/2022/07/29/filecoin/" title="filecoin日常维护常用命令">filecoin日常维护常用命令</a><time datetime="2022-07-29T04:27:29.000Z" title="发表于 2022-07-29 12:27:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/CDH6/" title="CDH6的部署和安装"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CDH6的部署和安装"/></a><div class="content"><a class="title" href="/2022/07/29/CDH6/" title="CDH6的部署和安装">CDH6的部署和安装</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/fastdfs/" title="fastDFS安装搭建"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="fastDFS安装搭建"/></a><div class="content"><a class="title" href="/2022/07/29/fastdfs/" title="fastDFS安装搭建">fastDFS安装搭建</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/graylog/" title="graylog的安装部署"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="graylog的安装部署"/></a><div class="content"><a class="title" href="/2022/07/29/graylog/" title="graylog的安装部署">graylog的安装部署</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/29/ELKF/" title="ELKF日志管理平台搭建"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ELKF日志管理平台搭建"/></a><div class="content"><a class="title" href="/2022/07/29/ELKF/" title="ELKF日志管理平台搭建">ELKF日志管理平台搭建</a><time datetime="2022-07-29T03:13:29.000Z" title="发表于 2022-07-29 11:13:29">2022-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 帆大腿</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
