@@ -1,152 +1,186 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="nginx平滑升级1.把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下1tar -zxvf nginx-*.**.*.tar.gz -C &#x2F;usr&#x2F;local&#x2F;  2.进行configure配置并编译12.&#x2F;configure  --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F; --user&#x3D;nginx --group&#x3D;nginx --w">
-<meta property="og:type" content="article">
-<meta property="og:title" content="nginx平滑升级">
-<meta property="og:url" content="http://example.com/2022/07/29/nginx/index.html">
-<meta property="og:site_name" content="帆大腿的博客">
-<meta property="og:description" content="nginx平滑升级1.把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下1tar -zxvf nginx-*.**.*.tar.gz -C &#x2F;usr&#x2F;local&#x2F;  2.进行configure配置并编译12.&#x2F;configure  --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F; --user&#x3D;nginx --group&#x3D;nginx --w">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-29T03:13:29.000Z">
-<meta property="article:modified_time" content="2022-07-29T04:09:37.632Z">
-<meta property="article:author" content="帆大腿">
-<meta property="article:tag" content="做饭，打游戏，玩技术">
-<meta name="twitter:card" content="summary">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="帆大腿">
+    
+    <meta name="description" content="记录帆大腿的生活、工作和学习笔记">
     
     
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
     
-    <!-- title -->
-    <title>nginx平滑升级</title>
-    <!-- styles -->
     
-<link rel="stylesheet" href="/css/style.css">
+    
+    
+    <title>nginx平滑升级 | 帆大腿的博客</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
 
-    <!-- persian styles -->
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: '加载中';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
     
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
 <meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="帆大腿的博客" type="application/atom+xml">
 </head>
-
-<body class="max-width mx-auto px3 ltr">
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about-me">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">开启歌词</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">回到顶部</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2022/07/29/mysqlnginx/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2022/07/29/redis/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/07/29/nginx/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/07/29/nginx/&text=nginx平滑升级"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/07/29/nginx/&is_video=false&description=nginx平滑升级"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=nginx平滑升级&body=Check out this article: http://example.com/2022/07/29/nginx/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/07/29/nginx/&name=nginx平滑升级&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/07/29/nginx/&t=nginx平滑升级"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
+    <div class="cube-type">
+        <span class="cube-typed-title">senrenbankaの部落格</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
 
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7"><span class="toc-number">1.</span> <span class="toc-text">nginx平滑升级</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%8A%8Anginx%E9%AB%98%E7%89%88%E6%9C%AC%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%8B%B7%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%88%B0-x2F-usr-x2F-local-x2F-%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1.把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%BF%9B%E8%A1%8Cconfigure%E9%85%8D%E7%BD%AE%E5%B9%B6%E7%BC%96%E8%AF%91"><span class="toc-number">1.2.</span> <span class="toc-text">2.进行configure配置并编译</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%8A%8A%E4%B9%8B%E5%89%8D%E7%9A%84nginx%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD"><span class="toc-number">1.3.</span> <span class="toc-text">3.把之前的nginx文件备份</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%84%B6%E5%90%8E%E8%BF%94%E5%9B%9Enginx-1-14-2%E4%B8%8B%E7%9A%84objs%E7%9B%AE%E5%BD%95%EF%BC%8C%E6%8A%8A%E6%96%B0%E7%9A%84nginx%E6%8B%B7%E8%B4%9D%E8%BF%87%E6%9D%A5"><span class="toc-number">1.4.</span> <span class="toc-text">4.然后返回nginx-1.14.2下的objs目录，把新的nginx拷贝过来</span></a></li></ol></li></ol>
-    </div>
-  </span>
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('http://cube-1252774894.cosgz.myqcloud.com/background.png');
+            background-repeat: no-repeat;
+            background-position: center -356px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('http://cube-1252774894.cosgz.myqcloud.com/background.png');
+            background-position: center -400px;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">senrenbankaの部落格</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '2000',
+                height: '1414'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+    <h1 class="title">nginx平滑升级</h1>
+    
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2022-07-29
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
 </div>
-
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        nginx平滑升级
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">帆大腿</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2022-07-29T03:13:29.000Z" itemprop="datePublished">2022-07-29</time>
-        
-      
     </div>
-
-
-      
-
-      
-
-    </div>
-  </header>
-  
-
-  <div class="content" itemprop="articleBody">
-    <h4 id="nginx平滑升级"><a href="#nginx平滑升级" class="headerlink" title="nginx平滑升级"></a>nginx平滑升级</h4><h5 id="1-把nginx高版本的压缩包拷到服务器上，解压到-x2F-usr-x2F-local-x2F-目录下"><a href="#1-把nginx高版本的压缩包拷到服务器上，解压到-x2F-usr-x2F-local-x2F-目录下" class="headerlink" title="1.把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下"></a>1.<strong>把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下</strong></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx-*.**.*.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <h4 id="nginx平滑升级"><a href="#nginx平滑升级" class="headerlink" title="nginx平滑升级"></a>nginx平滑升级</h4><h5 id="1-把nginx高版本的压缩包拷到服务器上，解压到-x2F-usr-x2F-local-x2F-目录下"><a href="#1-把nginx高版本的压缩包拷到服务器上，解压到-x2F-usr-x2F-local-x2F-目录下" class="headerlink" title="1.把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下"></a>1.<strong>把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下</strong></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx-*.**.*.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure>
 
 <h5 id="2-进行configure配置并编译"><a href="#2-进行configure配置并编译" class="headerlink" title="2.进行configure配置并编译"></a>2.<strong>进行configure配置并编译</strong></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure  --prefix=/usr/local/nginx/ --user=nginx --group=nginx --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module  --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-threads  --with-stream  --with-stream_ssl_module --with-http_slice_module --with-file-aio --with-http_v2_module</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
 
@@ -158,142 +192,265 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/nginx/sbin/nginx -v   (检查版本)</span><br><span class="line">/usr/local/nginx/sbin/nginx -t  （检查配置文件）</span><br><span class="line">/usr/local/nginx/sbin/nginx -s reload （重载）</span><br></pre></td></tr></table></figure>
 
 
-  </div>
-</article>
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
-        
-      </ul>
     </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7"><span class="toc-number">1.</span> <span class="toc-text">nginx平滑升级</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%8A%8Anginx%E9%AB%98%E7%89%88%E6%9C%AC%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%8C%85%E6%8B%B7%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%88%B0-x2F-usr-x2F-local-x2F-%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1.把nginx高版本的压缩包拷到服务器上，解压到&#x2F;usr&#x2F;local&#x2F;目录下</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%BF%9B%E8%A1%8Cconfigure%E9%85%8D%E7%BD%AE%E5%B9%B6%E7%BC%96%E8%AF%91"><span class="toc-number">1.2.</span> <span class="toc-text">2.进行configure配置并编译</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%8A%8A%E4%B9%8B%E5%89%8D%E7%9A%84nginx%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD"><span class="toc-number">1.3.</span> <span class="toc-text">3.把之前的nginx文件备份</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%84%B6%E5%90%8E%E8%BF%94%E5%9B%9Enginx-1-14-2%E4%B8%8B%E7%9A%84objs%E7%9B%AE%E5%BD%95%EF%BC%8C%E6%8A%8A%E6%96%B0%E7%9A%84nginx%E6%8B%B7%E8%B4%9D%E8%BF%87%E6%9D%A5"><span class="toc-number">1.4.</span> <span class="toc-text">4.然后返回nginx-1.14.2下的objs目录，把新的nginx拷贝过来</span></a></li></ol></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/07/29/nginx/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/07/29/nginx/&text=nginx平滑升级"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/07/29/nginx/&is_video=false&description=nginx平滑升级"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=nginx平滑升级&body=Check out this article: http://example.com/2022/07/29/nginx/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/07/29/nginx/&title=nginx平滑升级"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/07/29/nginx/&name=nginx平滑升级&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/07/29/nginx/&t=nginx平滑升级"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
-  </div>
 </div>
 
+<div class="cube-article-nav">
+    <ul>
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2016-2022
-    帆大腿
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
+        <li class="prev">
+            <a href="/2022/07/29/mysqlnginx/">
+                <i class="cube-icon cube-prev" aria-hidden="true"></i>
+                mysql通过nginx进行映射
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2022/07/29/redis/">
+                centos7 下安装redis4.0集群
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
 
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="搜索" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
     </div>
-    <!-- styles -->
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="搜索" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>帆大腿</span>
+    
+    
+    <a title="记录帆大腿的生活、工作和学习笔记">记录帆大腿的生活、工作和学习笔记</a>
+    
+    <div class="count">
+        <a class="count articles"><span>15</span>文章</a>
+        <a class="count tags"><span>0</span>标签</a>
+        <a class="count categories"><span>0</span>分类</a>
+    </div>
+</div>
 
 
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"Dear friends","author":"TRIPLANE","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/TRIPLANE - Dear friends.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Dear friends - TRIPLANE.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/TRIPLANE - Dear friends.jpg"},{"title":"Butter-Fly","author":"和田光司","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/和田光司 - Butter-Fly (ピアノヴァージョン).mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Butter-Fly (ピアノヴァージョン) - 和田光司.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/和田光司 - Butter-Fly (ピアノヴァージョン).jpg"},{"title":"宵闇花火","author":"葉月ゆら","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/葉月ゆら - 宵闇花火.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/宵闇花火 - 葉月ゆら.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/葉月ゆら - 宵闇花火.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: '开启歌词',
+            close: '关闭歌词'
+        }
+    })(window)
+</script>
 
 
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>近期文章</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/09/18/%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%8D%95%E7%B3%BB%E7%BB%9F/" title=""></a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/08/08/hexo/" title="hexo博客的搭建">hexo博客的搭建</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/08/08/zongjie/" title="个人命令总结">个人命令总结</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/07/29/filecoin-%E6%96%B0/" title="filecoin运维文档">filecoin运维文档</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/07/29/filecoin/" title="filecoin总结命令">filecoin总结命令</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
 
 
 
 
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
-    })
-  })
-  </script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>个人链接</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/GitHub.png">
+            
+            <a href="https://github.com/ZEROKISEKI" target="_blank">GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/Coding.png">
+            
+            <a href="https://coding.net/u/SORA1" target="_blank">Coding</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/SF.png">
+            
+            <a href="https://segmentfault.com/u/aonosora" target="_blank">SF社区</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/开发者头条.png">
+            
+            <a href="https://toutiao.io/u/148070" target="_blank">开发者头条</a>
+        </li>
+        
+    </ul>
+</div>
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
 
-<!-- Cloudflare Analytics -->
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>友情链接</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/friend_links/micblo.png">
+            <a href="https://blog.micblo.com/" target="_blank">罗大佬</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/friend_links/DIYgod.jpg">
+            <a href="https://www.anotherhome.net/" target="_blank">DIYgod</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="/images/friend_links.jpg ">
+            <a href="https://aonosora.com/" target="_blank">咪西西の部落格</a>
+        </li>
+        
+    </ul>
+</div>
 
-<!-- Umami Analytics -->
 
-<!-- Disqus Comments -->
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+© 2017 帆大腿
 
-<!-- utterances Comments -->
-
+<br>
+Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
 </body>
 </html>

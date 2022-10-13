@@ -1,209 +1,523 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="帆大腿">
+    
     <meta name="description" content="记录帆大腿的生活、工作和学习笔记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="帆大腿的博客">
-<meta property="og:url" content="http://example.com/archives/2022/08/index.html">
-<meta property="og:site_name" content="帆大腿的博客">
-<meta property="og:description" content="记录帆大腿的生活、工作和学习笔记">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="帆大腿">
-<meta property="article:tag" content="做饭，打游戏，玩技术">
-<meta name="twitter:card" content="summary">
     
     
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
     
-    <!-- title -->
-    <title>归档: 2022/8</title>
-    <!-- styles -->
     
-<link rel="stylesheet" href="/css/style.css">
+    
+    
+    <title>归档 | 帆大腿的博客</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
 
-    <!-- persian styles -->
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: '加载中';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
     
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
 <meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="帆大腿的博客" type="application/atom+xml">
 </head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-    <div class="content index py4">
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
         
-          <header id="header">
-  <a href="/">
-  
-    
-      <div id="logo" style="background-image: url(/images/logo.png);"></div>
-    
-  
-    <div id="title">
-      <h1>帆大腿的博客</h1>
-    </div>
-  </a>
-  <div id="nav">
-    <ul>
-      <li class="icon">
-        <a href="#" aria-label="目录"><i class="fas fa-bars fa-2x"></i></a>
-      </li>
-      <!--
-     --><li><a href="/">首页</a></li><!--
-   --><!--
-     --><li><a href="/about/">关于</a></li><!--
-   --><!--
-     --><li><a href="/archives/">归档</a></li><!--
-   --><!--
-     --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-   -->
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about-me">关于我</a>
+        </li>
+        
     </ul>
-  </div>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">开启歌词</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">回到顶部</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">senrenbankaの部落格</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
 </header>
 
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
         
-        <div id="archive">
-  <ul class="post-list">
-    
-    
-    
-    
-      
-      
-      
-      
-        <li class="post-year"><h2>2022</h2></li>
-      
-      <li class="post-item">
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
         
-    <div class="meta">
-      
+            z-index: -1;
+            background-image: url('http://cube-1252774894.cosgz.myqcloud.com/background.png');
+            background-repeat: no-repeat;
+            background-position: center -356px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('http://cube-1252774894.cosgz.myqcloud.com/background.png');
+            background-position: center -400px;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
         
-          <time datetime="2022-08-08T08:30:28.000Z" itemprop="datePublished">2022-08-08</time>
+        <div class="cube-type">
+            <span class="cube-typed-title">senrenbankaの部落格</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
         
-      
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '2000',
+                height: '1414'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <style>
+    @media(max-width: 768px) {
+        body {
+            background-color: #fff!important;
+        }
+    }
+</style>
+<div class="cube-archives">
+    
+        
+        <div class="cube-archive" style="margin-top: 0;">
+            
+                
+                   
+                            <h1 class="title">2022</h1>
+                            <ul class="posts">
+                   
+                            <li class="post">
+                                <a href="/2022/09/18/%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%8D%95%E7%B3%BB%E7%BB%9F/"></a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/08/08/hexo/">hexo博客的搭建</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/08/08/zongjie/">个人命令总结</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/filecoin-%E6%96%B0/">filecoin运维文档</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/filecoin/">filecoin总结命令</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/CDH6/">CDH6的部署和安装</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/ELKF/">ELKF日志管理平台搭建</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/fastdfs/">fastDFS安装搭建</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/graylog/">graylog的安装部署</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/mysqlnginx/">mysql通过nginx进行映射</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/nginx/">nginx平滑升级</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/redis/">centos7 下安装redis4.0集群</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/sqlserver/">sqlserver命令汇总</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/zabbix/">zabbix的安装部署</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2022/07/29/%E6%A6%95%E5%AE%9D/">榕宝</a>
+                            </li>
+                
+            
+                    </ul>
+                        </div>
+        
+    
+</div>
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="搜索" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
     </div>
-
-
-        <span>
-    
-        <a class="" href="/2022/08/08/hexo/">hexo博客的搭建</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2022-08-08T08:30:28.000Z" itemprop="datePublished">2022-08-08</time>
-        
-      
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="搜索" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
     </div>
-
-
-        <span>
-    
-        <a class="" href="/2022/08/08/zongjie/">个人命令总结</a>
-    
-
-
-</span>
-      </li>
-    
-  </ul>
-  
-
+    <div class="cube-search-result"></div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2016-2022
-    帆大腿
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">首页</a></li><!--
-     --><!--
-       --><li><a href="/about/">关于</a></li><!--
-     --><!--
-       --><li><a href="/archives/">归档</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
 
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>帆大腿</span>
+    
+    
+    <a title="记录帆大腿的生活、工作和学习笔记">记录帆大腿的生活、工作和学习笔记</a>
+    
+    <div class="count">
+        <a class="count articles"><span>15</span>文章</a>
+        <a class="count tags"><span>0</span>标签</a>
+        <a class="count categories"><span>0</span>分类</a>
     </div>
-    <!-- styles -->
+</div>
 
 
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"Dear friends","author":"TRIPLANE","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/TRIPLANE - Dear friends.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Dear friends - TRIPLANE.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/TRIPLANE - Dear friends.jpg"},{"title":"Butter-Fly","author":"和田光司","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/和田光司 - Butter-Fly (ピアノヴァージョン).mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Butter-Fly (ピアノヴァージョン) - 和田光司.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/和田光司 - Butter-Fly (ピアノヴァージョン).jpg"},{"title":"宵闇花火","author":"葉月ゆら","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/葉月ゆら - 宵闇花火.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/宵闇花火 - 葉月ゆら.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/葉月ゆら - 宵闇花火.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: '开启歌词',
+            close: '关闭歌词'
+        }
+    })(window)
+</script>
 
 
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>近期文章</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/09/18/%E9%83%A8%E7%BD%B2%E5%B7%A5%E5%8D%95%E7%B3%BB%E7%BB%9F/" title=""></a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/08/08/hexo/" title="hexo博客的搭建">hexo博客的搭建</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/08/08/zongjie/" title="个人命令总结">个人命令总结</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/07/29/filecoin-%E6%96%B0/" title="filecoin运维文档">filecoin运维文档</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/2022/07/29/filecoin/" title="filecoin总结命令">filecoin总结命令</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
 
 
 
 
-<!-- clipboard -->
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>个人链接</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/GitHub.png">
+            
+            <a href="https://github.com/ZEROKISEKI" target="_blank">GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/Coding.png">
+            
+            <a href="https://coding.net/u/SORA1" target="_blank">Coding</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/SF.png">
+            
+            <a href="https://segmentfault.com/u/aonosora" target="_blank">SF社区</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/开发者头条.png">
+            
+            <a href="https://toutiao.io/u/148070" target="_blank">开发者头条</a>
+        </li>
+        
+    </ul>
+</div>
 
-<!-- Google Analytics -->
 
-<!-- Baidu Analytics -->
 
-<!-- Cloudflare Analytics -->
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>友情链接</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/friend_links/micblo.png">
+            <a href="https://blog.micblo.com/" target="_blank">罗大佬</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/friend_links/DIYgod.jpg">
+            <a href="https://www.anotherhome.net/" target="_blank">DIYgod</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="/images/friend_links.jpg ">
+            <a href="https://aonosora.com/" target="_blank">咪西西の部落格</a>
+        </li>
+        
+    </ul>
+</div>
 
-<!-- Umami Analytics -->
 
-<!-- Disqus Comments -->
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+© 2017 帆大腿
 
-<!-- utterances Comments -->
-
+<br>
+Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
 </body>
 </html>
