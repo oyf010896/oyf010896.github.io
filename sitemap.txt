@@ -1,3 +1,4 @@
+http://example.com/2022/07/29/nginx/
 http://example.com/2022/07/29/filecoin/
 http://example.com/2022/10/13/ferry/
 http://example.com/2022/08/08/zongjie/
@@ -9,7 +10,6 @@ http://example.com/2022/07/29/CDH6/
 http://example.com/2022/07/29/sqlserver/
 http://example.com/2022/07/29/redis/
 http://example.com/2022/07/29/%E6%A6%95%E5%AE%9D/
-http://example.com/2022/07/29/nginx/
 http://example.com/2022/07/29/mysqlnginx/
 http://example.com/2022/07/29/fastdfs/
 http://example.com/2022/07/29/ELKF/
